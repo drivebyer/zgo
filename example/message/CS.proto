@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package message;
+
+// This file contain message between server and client.
+
+message CSJoin {
+    
+    int32 CODE1 = 1;
+    int32 CODE2 = 2;
+    string req = 3;
+}
+
+message SCJoin {
+    int32 CODE1 = 1;
+    int32 CODE2 = 2;
+    string resp = 3;
+}
