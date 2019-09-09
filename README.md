@@ -1,3 +1,3 @@
 # zgo
 
-This is a RPC server.
+This is a TCP server.

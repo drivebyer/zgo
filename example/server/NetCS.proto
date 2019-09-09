@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package main;
+
+// This file contain message between server and client.
+// CODE1 and CODE2 must determistic one message.
+// the PH is a place holder.
+
+message NetCSJoin {
+    enum ID {
+        PH = 0;
+        CODE1 = 1;
+        CODE2 = 2;
+    }
+    string req = 1;
+}
+
+message NetSCJoin {
+    enum ID {
+        PH = 0;
+        CODE1 = 2;
+        CODE2 = 1;
+    }
+    string resp = 1;
+}
+
+message NetCSPing {
+    enum ID {
+        PH = 0;
+        CODE1 = 2;
+        CODE2 = 3;
+    }
+}
+
+message NetCSPong {
+    enum ID {
+        PH = 0;
+        CODE1 = 3;
+        CODE2 = 2;
+    }
+}
