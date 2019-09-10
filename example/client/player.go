@@ -17,17 +17,20 @@ func main() {
 	}
 
 	c := zgo.MakeTCPClient()
+	// c.RemoteAddr = "192.168.31.95"
 	c.RemoteAddr = "localhost"
 	c.RemotePort = "9999"
-	conn := c.DialAndAccept()
-	zconn := zgo.Connection{}
-	zconn.Conn = conn
+
 	for {
+
+		conn := c.DialAndAccept()
+		zconn := zgo.Connection{}
+		zconn.Conn = conn
 		msg := NetCSJoin{}
 		msg.Req = "ping"
 
 		zconn.WriteAndFlush(int(NetCSJoin_CODE1), int(NetCSJoin_CODE2), playerID, &msg)
-		time.Sleep(1 * time.Second)
+		time.Sleep(1000 * time.Millisecond)
 	}
 	// ch := make(chan os.Signal, 1)
 	// select {

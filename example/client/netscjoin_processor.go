@@ -18,6 +18,6 @@ var SCJoinProcessor = NetSCJoinProcessor{int(NetSCJoin_CODE1), int(NetSCJoin_COD
 func (p *NetSCJoinProcessor) Handler(c *zgo.Connection, buf []byte) {
 	msg := &NetSCJoin{}
 	proto.Unmarshal(buf, msg)
-	fmt.Println(msg.GetResp())
+	fmt.Println("Get server message:", msg.GetResp())
 	//zgo.Connection.WriteAndFlush()
 }

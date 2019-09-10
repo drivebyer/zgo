@@ -9,7 +9,7 @@ import (
 type TCPClient struct {
 	RemotePort string
 	RemoteAddr string
-	activeConn map[*conn]struct{}
+	//activeConn map[*conn]struct{}
 }
 
 func MakeTCPClient() *TCPClient {
@@ -30,7 +30,7 @@ func (client *TCPClient) DialAndAccept() net.Conn {
 				log.Fatal(err)
 			}
 			// fmt.Printf("Client receive %d bytes\n", n)
-			Decode(b, &conn)
+			decode(b, &conn)
 		}
 	}()
 

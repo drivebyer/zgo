@@ -1,19 +1,14 @@
 package main
 
 import (
-	"log"
-
 	"github.com/drivebyer/zgo"
 )
 
 func main() {
 	s := zgo.MakeTCPServer()
-	s.Addr = "localhost"
+	s.Addr = ""
 	s.Port = "9999"
-	err := s.ListenAndAccept()
-	if err != nil {
-		log.Fatal(err)
-	}
+	s.ListenAndAccept()
 }
 
 func init() {

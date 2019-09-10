@@ -34,9 +34,9 @@ func init() {
 }
 
 func (c *Connection) WriteAndFlush(code1 int, code2 int, stubID uint64, msg proto.Message) {
-	b := Encode(code1, code2, stubID, msg)
+	b := encode(code1, code2, stubID, msg)
+	// log.Println(c.Conn, code1, code2, stubID, msg)
 	if _, err := c.Conn.Write(b); err != nil {
 		log.Fatal(err)
 	}
-	log.Println(code1, code2, stubID, msg)
 }

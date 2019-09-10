@@ -2,10 +2,8 @@ package zgo
 
 import (
 	"encoding/binary"
-	"fmt"
 	"log"
 	"net"
-	"reflect"
 	"time"
 )
 
@@ -26,7 +24,7 @@ import (
 //	StubID		stud id
 //	///////////////////////////////////////////////////////////////////////////////////////////
 
-func Decode(buf []byte, conn *net.Conn) {
+func decode(buf []byte, conn *net.Conn) {
 	code1 := uint8(buf[code1Off])
 	code2 := binary.BigEndian.Uint16(buf[code2Off : code2Off+code2Len])
 
@@ -63,7 +61,7 @@ func Decode(buf []byte, conn *net.Conn) {
 	c.Conn = *conn
 	cg.add(c)
 
-	fmt.Println(code1, code2, reflect.TypeOf(Processors[code1][code2]), reflect.ValueOf(Processors[code1][code2]))
+	// fmt.Println(code1, code2, reflect.TypeOf(Processors[code1][code2]), reflect.ValueOf(Processors[code1][code2]))
 	var p LogicProcessor = Processors[code1][code2]
 
 	p.Handler(c, buf[stubIDOff+stubIDLen:len(buf)])

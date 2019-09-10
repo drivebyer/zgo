@@ -18,7 +18,7 @@ var CSJoinProcessor = NetCSJoinProcessor{int(NetCSJoin_CODE1), int(NetCSJoin_COD
 func (p *NetCSJoinProcessor) Handler(c *zgo.Connection, buf []byte) {
 	msg := &NetCSJoin{}
 	proto.Unmarshal(buf, msg)
-	fmt.Println(msg.GetReq(), c.StubID)
+	fmt.Println("Get client message:", msg.GetReq(), c.StubID)
 
 	responseMSG := NetSCJoin{}
 	responseMSG.Resp = "pong"

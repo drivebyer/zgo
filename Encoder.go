@@ -31,7 +31,7 @@ type tlvMessage struct {
 }
 
 // Encode encode a TLV format which include TLV header and content
-func Encode(code1 int, code2 int, stubID uint64, pb proto.Message) []byte {
+func encode(code1 int, code2 int, stubID uint64, pb proto.Message) []byte {
 
 	// csJoin := pb.(*message.NetCSJoin) // TODO: make more flexiable, since pb may be hold difference type.
 	content, err := proto.Marshal(pb)
