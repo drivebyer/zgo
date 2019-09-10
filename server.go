@@ -56,7 +56,7 @@ func (s *TCPServer) ListenAndAccept() {
 						log.Printf("connection %v over! end with err %v\n", conn, err)
 						conn.Close()
 
-						ok, i := s.gp.Put()
+						i, ok := s.gp.Put()
 						if !ok {
 							return // If the pool is full, we exit the goroutine.
 						}

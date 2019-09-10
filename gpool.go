@@ -1,7 +1,6 @@
 package zgo
 
 import (
-	"log"
 	"sync/atomic"
 )
 
@@ -37,15 +36,16 @@ func MakeGPool(size int32) *gpool {
 }
 
 // Put make the getg() block on the channel's sudog send queue.
-func (gp *gpool) Put() (bool, interface{}) {
+func (gp *gpool) Put() (interface{}, bool) {
 	if atomic.LoadInt32(&gp.count) == gp.size {
+		// If the gpool is full, do nothing.
 		return false, false
 	}
 	atomic.AddInt32(&gp.count, 1)
-	log.Printf("Put a goroutine in gpool, count:%d", atomic.LoadInt32(&gp.count))
+	//log.Printf("Put a goroutine in gpool, count:%d", atomic.LoadInt32(&gp.count))
 	gp.q <- struct{}{}
 	work := <-gp.work // When the goroutine wake up, it must be given a new work.
-	return true, work
+	return work, true
 }
 
 // Get wake a goroutine which wait on the channel's sudog send queue.
@@ -55,7 +55,7 @@ func (gp *gpool) Get(work interface{}) bool {
 		return false
 	}
 	atomic.AddInt32(&gp.count, -1)
-	log.Printf("Get a goroutine in gpool, count:%d", atomic.LoadInt32(&gp.count))
+	//log.Printf("Get a goroutine in gpool, count:%d", atomic.LoadInt32(&gp.count))
 	<-gp.q
 	gp.work <- work
 	return true
