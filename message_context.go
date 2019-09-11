@@ -1,5 +1,7 @@
 package zgo
 
+import "time"
+
 // TLV related.
 const (
 	CODE1 = "CODE1"
@@ -33,6 +35,18 @@ const (
 
 	// TLV header length
 	headerLen = code1Len + code2Len + lengthLen + magicNumLen + stubIDLen + stubIDLen
+
+	// How many times we try when we dont's receive data from client
+	tryCount = 10
+	// How long we wait before we send Ping after we dont's receive data from client
+	idleTime        = 15000
+	idleTimeDration = time.Duration(idleTime * time.Millisecond)
+	//
+	retryInterval         = 1000
+	retryIntervalDutation = time.Duration(retryInterval * time.Millisecond)
+	// keepalive tick interval
+	tickTime         = 1000
+	tickTimeDuration = time.Duration(tickTime * time.Millisecond)
 )
 
 // logicProcessors hold all logic processor which define by user.

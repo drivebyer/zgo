@@ -16,21 +16,23 @@ func MakeTCPClient() *TCPClient {
 	return &TCPClient{}
 }
 
-func (client *TCPClient) DialAndAccept() net.Conn {
-	conn, err := net.Dial("tcp", client.RemoteAddr+":"+client.RemotePort)
-	//defer conn.Close()
+func (client *TCPClient) DialAndAccept() *Connection {
+	c, err := net.Dial("tcp", client.RemoteAddr+":"+client.RemotePort)
+	conn := &Connection{Conn: c}
+
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("DialAndAccept", err)
 	}
 	go func() {
+		defer conn.Close()
 		b := make([]byte, 256)
 		for {
-			_, err := conn.Read(b)
+			_, err := conn.Conn.Read(b)
 			if err != nil {
-				log.Fatal(err)
+				log.Fatal("DialAndAccept", err)
 			}
 			// fmt.Printf("Client receive %d bytes\n", n)
-			decode(b, &conn)
+			decode(b, conn)
 		}
 	}()
 

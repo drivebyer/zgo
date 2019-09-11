@@ -24,6 +24,7 @@ message NetSCJoin {
     string resp = 1;
 }
 
+// Keepalive message
 message NetCSPing {
     enum ID {
         PH = 0;
@@ -32,6 +33,7 @@ message NetCSPing {
     }
 }
 
+// Keepalive message
 message NetCSPong {
     enum ID {
         PH = 0;
