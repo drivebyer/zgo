@@ -2,6 +2,7 @@ package zgo
 
 import (
 	"sync/atomic"
+
 )
 
 // This file support goroutine pool.
